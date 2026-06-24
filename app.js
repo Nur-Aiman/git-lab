@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 const homeRoutes = require('./routes/homeRoutes');
 const userRoutes = require('./routes/userRoutes');
 const smartphoneRoutes = require('./routes/smartphoneRoutes');
+const electricCarRoutes = require('./routes/electricCarRoutes');
 
 // Middleware
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/', homeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/smartphones', smartphoneRoutes);
+app.use('/api/electric-cars', electricCarRoutes);
 app.use('/api/hello', (req, res, next) => {
   if (req.method === 'POST') {
     return next();
@@ -44,4 +46,12 @@ app.listen(PORT, () => {
   console.log(`  POST /api/smartphones`);
   console.log(`  PUT  /api/smartphones/:id`);
   console.log(`  DELETE /api/smartphones/:id`);
+  console.log(`  GET  /api/electric-cars`);
+  console.log(`  GET  /api/electric-cars/:id`);
+  console.log(`  GET  /api/electric-cars/brand/:brand`);
+  console.log(`  GET  /api/electric-cars/price/filter (with ?minPrice=X&maxPrice=Y)`);
+  console.log(`  POST /api/electric-cars`);
+  console.log(`  PUT  /api/electric-cars/:id`);
+  console.log(`  DELETE /api/electric-cars/:id`);
+  console.log(`  DELETE /api/users/:id`);
 });
