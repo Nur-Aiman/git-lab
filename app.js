@@ -2,36 +2,38 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Import routes
+const homeRoutes = require('./routes/homeRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 // Middleware
 app.use(express.json());
 
-// Endpoint 1: GET /
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Express API!' });
-});
-
-// Endpoint 2: GET /api/users
-app.get('/api/users', (req, res) => {
-  const users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' }
-  ];
-  res.json(users);
-});
-
-// Endpoint 3: POST /api/hello
-app.post('/api/hello', (req, res) => {
-  const { name } = req.body;
-  
-  if (!name) {
-    return res.status(400).json({ error: 'Name is required' });
+// Routes
+app.use('/', homeRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/hello', (req, res, next) => {
+  if (req.method === 'POST') {
+    return next();
   }
-  
-  res.json({ message: `Hello, ${name}!` });
+  res.status(405).json({ error: 'Method not allowed' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`\nAvailable endpoints:`);
+  console.log(`  GET  /`);
+  console.log(`  POST /api/hello`);
+  console.log(`  GET  /api/users`);
+  console.log(`  GET  /api/users/:id`);
+  console.log(`  POST /api/users`);
+  console.log(`  PUT  /api/users/:id`);
+  console.log(`  DELETE /api/users/:id`);
 });
