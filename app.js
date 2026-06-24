@@ -7,6 +7,8 @@ const homeRoutes = require('./routes/homeRoutes');
 const userRoutes = require('./routes/userRoutes');
 const smartphoneRoutes = require('./routes/smartphoneRoutes');
 const electricCarRoutes = require('./routes/electricCarRoutes');
+const motorcycleRoutes = require('./routes/motorcycleRoutes');
+const houseRoutes = require('./routes/houseRoutes');
 
 // Middleware
 app.use(express.json());
@@ -16,6 +18,8 @@ app.use('/', homeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/smartphones', smartphoneRoutes);
 app.use('/api/electric-cars', electricCarRoutes);
+app.use('/api/motorcycles', motorcycleRoutes);
+app.use('/api/houses', houseRoutes);
 app.use('/api/hello', (req, res, next) => {
   if (req.method === 'POST') {
     return next();
@@ -53,5 +57,18 @@ app.listen(PORT, () => {
   console.log(`  POST /api/electric-cars`);
   console.log(`  PUT  /api/electric-cars/:id`);
   console.log(`  DELETE /api/electric-cars/:id`);
-  console.log(`  DELETE /api/users/:id`);
+  console.log(`  GET  /api/motorcycles`);
+  console.log(`  GET  /api/motorcycles/:id`);
+  console.log(`  GET  /api/motorcycles/brand/:brand`);
+  console.log(`  GET  /api/motorcycles/type/:type`);
+  console.log(`  POST /api/motorcycles`);
+  console.log(`  PUT  /api/motorcycles/:id`);
+  console.log(`  DELETE /api/motorcycles/:id`);
+  console.log(`  GET  /api/houses`);
+  console.log(`  GET  /api/houses/:id`);
+  console.log(`  GET  /api/houses/bedrooms/:bedrooms`);
+  console.log(`  GET  /api/houses/price/filter (with ?minPrice=X&maxPrice=Y)`);
+  console.log(`  POST /api/houses`);
+  console.log(`  PUT  /api/houses/:id`);
+  console.log(`  DELETE /api/houses/:id`);
 });
