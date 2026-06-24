@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 // Import routes
 const homeRoutes = require('./routes/homeRoutes');
 const userRoutes = require('./routes/userRoutes');
+const smartphoneRoutes = require('./routes/smartphoneRoutes');
 
 // Middleware
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.json());
 // Routes
 app.use('/', homeRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/smartphones', smartphoneRoutes);
 app.use('/api/hello', (req, res, next) => {
   if (req.method === 'POST') {
     return next();
@@ -36,4 +38,10 @@ app.listen(PORT, () => {
   console.log(`  POST /api/users`);
   console.log(`  PUT  /api/users/:id`);
   console.log(`  DELETE /api/users/:id`);
+  console.log(`  GET  /api/smartphones`);
+  console.log(`  GET  /api/smartphones/:id`);
+  console.log(`  GET  /api/smartphones/brand/:brand`);
+  console.log(`  POST /api/smartphones`);
+  console.log(`  PUT  /api/smartphones/:id`);
+  console.log(`  DELETE /api/smartphones/:id`);
 });
